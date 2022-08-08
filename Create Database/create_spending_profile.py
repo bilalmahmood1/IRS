@@ -1,0 +1,30 @@
+# -*- coding: utf-8 -*-
+"""
+Create average monthly spending profiles for the accounts in test campaign, 2018 campaign and 2019 campaign 6 months before the contact date
+@author: BM387
+"""
+
+
+from help_profiling_functions import *
+
+years = ["test", 2018, 2019]
+
+for year in years:
+
+    ## Target accounts to profile
+    df_targets = pd.read_csv(r"./profile {}/targets.csv".format(year),
+                                  sep = ";")
+
+    # Creating average monthly spending profile
+    df_spending_profile = make_spending_profile(df_targets, months = 6)
+
+
+    # Saving the spending profile
+    df_spending_profile.to_csv("./profile {}/spending.csv".format(year), 
+                                       sep = ";",
+                                       index = False)
+
+
+
+
+
